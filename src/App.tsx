@@ -89,22 +89,60 @@ useEffect(() => {
 
 
   return (
-    <div>
-      <h1>Jammming</h1>
-      <SearchBar onSearch={handleSearch} />
-      <div>
-        <SearchResults results={searchResults} onAdd={addTrackToPlaylist} />
-        <Playlist
-          name={playlistName}
-          tracks={playlist}
-          onRemove={removeTrackFromPlaylist}
-          onNameChange={updatePlaylistName}
-          accessToken={accessToken}
-        />
-        <button onClick={redirectToSpotifyAuthorization}>Login with Spotify</button>
-        <button onClick={logout}>Logout</button>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white w-full">
+    <div className="container mx-auto py-8 px-4">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-5xl font-bold text-green-500 mb-4">Jammming</h1>
+        <p className="text-gray-400 text-lg">Create and share your Spotify playlists</p>
+      </header>
+  
+      {/* Search Bar */}
+      <div className="mb-8">
+        <SearchBar onSearch={handleSearch} />
+      </div>
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Search Results */}
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4">Search Results</h2>
+          <SearchResults results={searchResults} onAdd={addTrackToPlaylist} />
+        </div>
+  
+        {/* Playlist */}
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4">{playlistName}</h2>
+          <Playlist
+            name={playlistName}
+            tracks={playlist}
+            onRemove={removeTrackFromPlaylist}
+            onNameChange={updatePlaylistName}
+            accessToken={accessToken}
+          />
+        </div>
+      </div>
+  
+      {/* Login/Logout Buttons */}
+      <div className="mt-8 text-center">
+        {!accessToken ? (
+          <button
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg"
+            onClick={redirectToSpotifyAuthorization}
+          >
+            Login with Spotify
+          </button>
+        ) : (
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </div>
+  </div>
+  
   )
 }
 
