@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState,useEffect} from "react"
 import { savePlaylistToSpotify } from "../api/SavePlaylist"
 
 interface PlaylistProps{
@@ -6,11 +6,16 @@ interface PlaylistProps{
     tracks: any[]
     onRemove: (track:any) => void
     onNameChange: (name:string) => void
+    accessToken: string | null
 }
 
 const Playlist: React.FC<PlaylistProps> = ({ name,tracks,onRemove,onNameChange,accessToken}) => {
     const [editing,setEditing] = useState(false)
-    const [newName, setNewName] = useState('')
+    const [newName, setNewName] = useState(name)
+
+    useEffect(() => {
+      setNewName(name);
+    }, [name]);
  
     const handleSaveToSpotify = async () => {
       if (accessToken) {
@@ -21,8 +26,12 @@ const Playlist: React.FC<PlaylistProps> = ({ name,tracks,onRemove,onNameChange,a
   };
 
   const handleNameChange = () => {
+    if (newName.trim() === "") {
+      setNewName(name);
+    } else {
       onNameChange(newName);
-      setEditing(false);
+    }
+    setEditing(false);
   };
 
     return(
