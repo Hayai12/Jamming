@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import { savePlaylistToSpotify } from "../api/SavePlaylist"
 
 interface PlaylistProps{
     name: string
@@ -7,14 +8,22 @@ interface PlaylistProps{
     onNameChange: (name:string) => void
 }
 
-const Playlist: React.FC<PlaylistProps> = ({ name,tracks,onRemove,onNameChange}) => {
+const Playlist: React.FC<PlaylistProps> = ({ name,tracks,onRemove,onNameChange,accessToken}) => {
     const [editing,setEditing] = useState(false)
     const [newName, setNewName] = useState('')
+ 
+    const handleSaveToSpotify = async () => {
+      if (accessToken) {
+          await savePlaylistToSpotify(name, tracks, accessToken);
+      } else {
+          console.error('No se ha obtenido un token de acceso');
+      }
+  };
 
-    const handleNameChange = () => {
-        onNameChange(newName)
-        setEditing(false)
-    }
+  const handleNameChange = () => {
+      onNameChange(newName);
+      setEditing(false);
+  };
 
     return(
         <div>
@@ -39,7 +48,7 @@ const Playlist: React.FC<PlaylistProps> = ({ name,tracks,onRemove,onNameChange})
           </li>
         ))}
       </ul>
-      <button>Guardar en Spotify</button>
+      <button onClick={handleSaveToSpotify}>Guardar en Spotify</button>
     </div>
     )
 

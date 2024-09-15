@@ -1,7 +1,7 @@
 const clientId = '766cb52937e64b7da18cd9ce55020794'
 const clientSecret = '3fbfdf0be5e349bc845b8194e3f79fd0'
 
-export async function getSpotifyToken(){
+export async function getSpotifyToken(code: string){
     const authString = btoa(`${clientId}:${clientSecret}`)
 
     try{
@@ -11,7 +11,11 @@ export async function getSpotifyToken(){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Basic ${authString}`
             },
-            body:'grant_type=client_credentials'
+            body: new URLSearchParams({
+                grant_type: 'authorization_code',
+                code: code,
+                redirect_uri: 'http://localhost:5173/'
+            })
         })
         if(!response.ok){
             throw new Error(`Error al obtener el token ${response.status}`)

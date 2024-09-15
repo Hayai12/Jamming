@@ -1,12 +1,9 @@
-import { getSpotifyToken } from "./spotifyApi"
-
-export async function searchSpotify(query:string){
-    const token = await getSpotifyToken()
+export async function searchSpotify(query:string, accessToken: string){
     try{
         const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track`,{
             method:'GET',
             headers:{
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${accessToken}`
             }
         })
         if(!response.ok){
