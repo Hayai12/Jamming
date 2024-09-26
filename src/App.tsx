@@ -27,8 +27,8 @@ function App() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   
   const redirectToSpotifyAuthorization = () => {
-    const clientId = '766cb52937e64b7da18cd9ce55020794';
-    const redirectUri = 'http://localhost:5173/'
+    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+    const redirectUri = 'https://jamming-hayai.netlify.app'
     const scopes = 'playlist-modify-public playlist-modify-private';
     const responseType = 'code';
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=${responseType}&scope=${encodeURIComponent(scopes)}`;

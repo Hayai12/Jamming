@@ -1,29 +1,36 @@
-import React, {useState} from "react"
+import React, { useState } from "react";
 
-interface SearchBarProps{
-    onSearch: (query:string) => void
+interface SearchBarProps {
+  onSearch: (query: string) => void;
 }
 
-const SearchBar:React.FC<SearchBarProps> = ({onSearch}) => {
-    const [searchquery, setSearchquery] = useState('')
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearch = () => {
-        onSearch(searchquery)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm) {
+      onSearch(searchTerm);
     }
-    return(
-        <div>
-            <input
-                className="bg-gray-800 text-white px-4 py-2 w-full max-w-md rounded-l-full focus:outline-none focus:ring-2 focus:ring-green-500"
-                value={searchquery}
-                onChange={(e)=> setSearchquery(e.target.value)}
-            />
-            <button 
-             className=" text-white text-stroke px-6 py-2 rounded-r-full transition-all"
-            onClick={handleSearch}>
-                Buscar
-            </button>
-        </div>
-    )
-}
+  };
 
-export default SearchBar
+  return (
+    <form onSubmit={handleSubmit} className="flex justify-center items-center w-full max-w-md text-black">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search Subreddit..."
+        className="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      />
+      <button
+        type="submit"
+        className="p-3 bg-blue-500 text-white font-semibold rounded-r-lg hover:bg-blue-600 transition"
+      >
+        Search
+      </button>
+    </form>
+  );
+};
+
+export default SearchBar;

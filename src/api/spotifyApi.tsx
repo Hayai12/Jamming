@@ -1,5 +1,6 @@
-const clientId = '766cb52937e64b7da18cd9ce55020794'
-const clientSecret = '3fbfdf0be5e349bc845b8194e3f79fd0'
+const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+
 
 export async function getSpotifyToken(code: string){
     const authString = btoa(`${clientId}:${clientSecret}`)
@@ -14,7 +15,7 @@ export async function getSpotifyToken(code: string){
             body: new URLSearchParams({
                 grant_type: 'authorization_code',
                 code: code,
-                redirect_uri: 'http://localhost:5173/'
+                redirect_uri: 'https://jamming-hayai.netlify.app'
             })
         })
         if(!response.ok){
