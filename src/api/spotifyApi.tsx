@@ -15,7 +15,7 @@ export async function getSpotifyToken(code: string){
             body: new URLSearchParams({
                 grant_type: 'authorization_code',
                 code: code,
-                redirect_uri: 'https://jamming-hayai.netlify.app'
+                redirect_uri: 'https://jamming-hayai.netlify.app/'
             })
         })
         if(!response.ok){

@@ -10,7 +10,6 @@ const getStoredToken = () => {
   return localStorage.getItem('spotifyAccessToken');
 };
 
-// Función para almacenar el token en el almacenamiento local
 const storeToken = (token: string) => {
   localStorage.setItem('spotifyAccessToken', token);
 };
@@ -28,17 +27,19 @@ function App() {
   
   const redirectToSpotifyAuthorization = () => {
     const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-    const redirectUri = 'https://jamming-hayai.netlify.app'
+    const redirectUri = 'https://jamming-hayai.netlify.app/'
     const scopes = 'playlist-modify-public playlist-modify-private';
     const responseType = 'code';
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=${responseType}&scope=${encodeURIComponent(scopes)}`;
     window.location.href = authUrl;
 };
+
+
 const handleAuthorizationCode = async (code: string) => {
   try {
       const token = await getSpotifyToken(code);
       if (token) {
-          storeToken(token); // Almacenar el token en el almacenamiento local
+          storeToken(token); 
           setAccessToken(token);
       }
   } catch (error) {
@@ -118,6 +119,7 @@ useEffect(() => {
             onRemove={removeTrackFromPlaylist}
             onNameChange={updatePlaylistName}
             accessToken={accessToken}
+            setTracks={setPlaylist}
           />
         </div>
       </div>
