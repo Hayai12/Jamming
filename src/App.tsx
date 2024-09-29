@@ -47,7 +47,6 @@ const handleAuthorizationCode = async (code: string) => {
   }
 };
 
-// Verificar el token almacenado al iniciar la aplicación
 useEffect(() => {
   const storedToken = getStoredToken();
   if (storedToken) {
@@ -62,14 +61,16 @@ useEffect(() => {
 }, []);
 
 
-  const handleSearch = async (query: string) => {
-    if (accessToken) {
-      const results = await searchSpotify(query, accessToken);
-      setSearchResults(results);
+const handleSearch = async (query: string) => {
+  if (accessToken) {
+    const results = await searchSpotify(query, accessToken);
+    setSearchResults(results);
   } else {
-      console.error('No se ha obtenido un token de acceso');
+    alert('You need to log in to search for tracks on Spotify.');
+    console.error('No access token available.');
   }
-  };
+};
+
 
   const addTrackToPlaylist = (track: any) => {
     setPlaylist([...playlist, track]);
@@ -84,10 +85,13 @@ useEffect(() => {
   };
 
   const logout = () => {
-    localStorage.removeItem('spotifyAccessToken'); // Eliminar el token de localStorage
-    setAccessToken(null); // Actualizar el estado para que ya no tenga un token
-  };
+    localStorage.removeItem('spotifyAccessToken');
 
+    setAccessToken(null);
+    setSearchResults([]);
+    setPlaylist([]);
+    setPlaylistName('New Playlist');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white w-full">
