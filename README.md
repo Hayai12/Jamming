@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Jammming App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+Jammming is a React-based web application that allows users to log in with their **GitHub account**, search for songs, and create playlists. Users can then save these playlists directly to their **Spotify account**. This project integrates the **Spotify Web API** for music search and playlist management.
 
-Currently, two official plugins are available:
+## Features
+- **Spotify Authentication**: Log in using your Spotify account.
+- **Search Songs**: Find tracks from Spotify’s vast music library.
+- **Create Playlists**: Add selected tracks to a playlist.
+- **Save to Spotify**: Automatically save your playlists to your Spotify account.
+- **Responsive UI**: A modern and mobile-friendly design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+```
+📂 Jammming-App
+├── 📂 src
+│   ├── 📂 components      # UI Components (SearchBar, SearchResults, Playlist)
+│   ├── 📂 api             # API Calls (spotifySearch, spotifyApi)
+│   ├── 📄 App.tsx        # Main application logic
+│   ├── 📄 index.tsx      # React entry point
+├── 📄 package.json        # Dependencies and scripts
+├── 📄 README.md          # Documentation
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Prerequisites
+Ensure you have **Node.js** installed, then install dependencies:
+```bash
+npm install
 ```
+
+### Setting Up Environment Variables
+Create a `.env` file in the root directory and add:
+```
+VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
+```
+
+### Running the Project
+Start the development server:
+```bash
+npm run dev
+```
+
+### Logging In with Spotify
+- Click the **Login with Spotify** button.
+- Authorize the app to access your account.
+- Start searching and creating playlists!
+
+## Deployment
+The project is deployed on **Netlify**: [Jammming App](https://jamming-hayai.netlify.app/)
+
+## Technologies Used
+- **React (TypeScript)**
+- **Spotify Web API**
+- **Tailwind CSS**
+- **Netlify (Deployment)**
+
+## Contribution
+Feel free to contribute by improving the UI, adding features, or enhancing API integration.
+
+## License
+This project is licensed under the **MIT License**.
