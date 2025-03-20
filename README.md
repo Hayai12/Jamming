@@ -58,6 +58,3 @@ The project is deployed on **Netlify**: [Jammming App](https://jamming-hayai.net
 
 ## Contribution
 Feel free to contribute by improving the UI, adding features, or enhancing API integration.
-
-## License
-This project is licensed under the **MIT License**.
